@@ -2,73 +2,52 @@
 
 import { useEffect, useState } from "react";
 import type { User } from "firebase/auth";
-import { onAuthStateChanged, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
-import { getFirebaseAuth } from "@/lib/firebase";
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
-declare global {
-  interface Window {
-    recaptchaVerifier?: RecaptchaVerifier;
-  }
+// ─── EMAIL AUTH ─────────────────────────
+
+export function signInWithEmail(email: string, password: string) {
+  return signInWithEmailAndPassword(auth, email, password);
 }
+
+export function signUpWithEmail(email: string, password: string) {
+  return createUserWithEmailAndPassword(auth, email, password);
+}
+
+// ─── HOOK ───────────────────────────────
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let resolved = false;
-    const timeout = window.setTimeout(() => {
-      if (!resolved) {
-        setError("Firebase ne repond pas. Verifiez les cles dans .env.local puis relancez l'application.");
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (currentUser) => {
+        setUser(currentUser);
+        setError(null);
+        setLoading(false);
+      },
+      () => {
+        setError("Erreur Firebase Auth");
         setLoading(false);
       }
-    }, 6000);
+    );
 
-    try {
-      const unsubscribe = onAuthStateChanged(getFirebaseAuth(), (currentUser) => {
-        resolved = true;
-        window.clearTimeout(timeout);
-        setUser(currentUser);
-        setLoading(false);
-      });
-
-      return () => {
-        window.clearTimeout(timeout);
-        unsubscribe();
-      };
-    } catch (err) {
-      resolved = true;
-      window.clearTimeout(timeout);
-      setError(err instanceof Error ? err.message : "Configuration Firebase invalide.");
-      setLoading(false);
-      return undefined;
-    }
+    return () => unsubscribe();
   }, []);
 
   return {
     user,
     loading,
     error,
-    logout: () => signOut(getFirebaseAuth()),
+    logout: () => signOut(auth),
   };
-}
-
-export function getRecaptchaVerifier() {
-  if (!window.recaptchaVerifier) {
-    window.recaptchaVerifier = new RecaptchaVerifier(getFirebaseAuth(), "recaptcha-container", {
-      size: "invisible",
-    });
-  }
-
-  return window.recaptchaVerifier;
-}
-
-export function resetRecaptchaVerifier() {
-  window.recaptchaVerifier?.clear();
-  window.recaptchaVerifier = undefined;
-}
-
-export function sendOtp(phone: string) {
-  return signInWithPhoneNumber(getFirebaseAuth(), phone.trim(), getRecaptchaVerifier());
 }

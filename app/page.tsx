@@ -1,5 +1,5 @@
-import CoutureApp from "@/components/CoutureApp";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <CoutureApp />;
+  redirect("/dashboard");
 }

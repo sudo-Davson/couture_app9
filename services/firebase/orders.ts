@@ -49,3 +49,10 @@ export function updateOrderStatus(userId: string, orderId: string, status: Order
     updatedAt: serverTimestamp(),
   });
 }
+
+export function updateOrderData(userId: string, orderId: string, data: Partial<NewOrderInput>) {
+  return updateDoc(userOrderDoc(userId, orderId), {
+    ...data,
+    updatedAt: serverTimestamp(),
+  });
+}
