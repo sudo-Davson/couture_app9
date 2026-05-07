@@ -43,11 +43,11 @@ export default function CoutureApp() {
           client={selectedClient} 
           orders={clientOrders}
           onBack={() => setSelectedClientId(null)}
-          onSaveMeasurements={async (m) => await saveMeasurements(user.uid, selectedClient.id, m)}
-          onAddOrder={async (input) => await createOrder(user.uid, input, selectedClient.name)}
-          onUpdateOrder={async (id, data) => await updateOrderData(user.uid, id, data)}
-          onUpdateOrderStatus={async (id, status) => await updateOrderStatus(user.uid, id, status)}
-          onUpdateClient={async (input) => await updateClient(user.uid, selectedClient.id, input)}
+          onSaveMeasurements={async (m) => { await saveMeasurements(user.uid, selectedClient.id, m); }}
+          onAddOrder={async (input) => { await createOrder(user.uid, input, selectedClient.name); }}
+          onUpdateOrder={async (id, data) => { await updateOrderData(user.uid, id, data); }}
+          onUpdateOrderStatus={async (id, status) => { await updateOrderStatus(user.uid, id, status); }}
+          onUpdateClient={async (input) => { await updateClient(user.uid, selectedClient.id, input); }}
           onDeleteClient={async () => { await deleteClient(user.uid, selectedClient.id); setSelectedClientId(null); }}
         />
       );
@@ -69,7 +69,7 @@ export default function CoutureApp() {
           <OrdersView 
             orders={orders} 
             clients={clients}
-            onUpdateOrderStatus={async (id, status) => await updateOrderStatus(user.uid, id, status)}
+            onUpdateOrderStatus={async (id, status) => { await updateOrderStatus(user.uid, id, status); }}
           />
         );
       case "profile":
