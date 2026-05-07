@@ -25,7 +25,7 @@ export function DashboardView({ clients, orders }: { clients: Client[]; orders: 
   return (
     <div className="space-y-6 pb-20">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-black text-slate-900 tracking-tight">Tableau de bord</h2>
+        <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Tableau de bord</h2>
       </div>
       
       <div className="grid grid-cols-2 gap-4">
@@ -34,7 +34,7 @@ export function DashboardView({ clients, orders }: { clients: Client[]; orders: 
             <Users size={28} />
           </div>
           <div>
-            <p className="text-3xl font-black text-slate-900">{clients.length}</p>
+            <p className="text-3xl font-black text-slate-900 dark:text-white">{clients.length}</p>
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Clients</p>
           </div>
         </Card>
@@ -44,7 +44,7 @@ export function DashboardView({ clients, orders }: { clients: Client[]; orders: 
             <Scissors size={28} />
           </div>
           <div>
-            <p className="text-3xl font-black text-slate-900">{activeOrders.length}</p>
+            <p className="text-3xl font-black text-slate-900 dark:text-white">{activeOrders.length}</p>
             <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">En cours</p>
           </div>
         </Card>
@@ -55,9 +55,9 @@ export function DashboardView({ clients, orders }: { clients: Client[]; orders: 
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Encaissé</p>
           <p className="text-xl font-black">{totalEncaisse.toLocaleString()} <span className="text-sm">FCFA</span></p>
         </div>
-        <div className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 shadow-sm">
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">En attente</p>
-          <p className="text-xl font-black text-slate-900">{totalEnAttente.toLocaleString()} <span className="text-sm">FCFA</span></p>
+          <p className="text-xl font-black text-slate-900 dark:text-white">{totalEnAttente.toLocaleString()} <span className="text-sm">FCFA</span></p>
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export function DashboardView({ clients, orders }: { clients: Client[]; orders: 
               <Clock size={24} />
             </div>
             <div>
-              <p className="font-bold text-slate-900">{lateOrders.length} commande(s) en retard</p>
+              <p className="font-bold text-slate-900 dark:text-white">{lateOrders.length} commande(s) en retard</p>
               <p className="text-sm font-medium text-slate-500">Action requise immédiatement.</p>
             </div>
           </Card>

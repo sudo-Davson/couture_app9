@@ -189,7 +189,7 @@ export function ClientDetailsView({
           <button onClick={() => setShowEditClient(false)} className="p-2 bg-white shadow-sm border border-slate-100 rounded-full active:scale-95 text-slate-600">
             <ChevronLeft size={24} />
           </button>
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">Modifier Client</h2>
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Modifier Client</h2>
         </div>
         <form onSubmit={handleUpdateClient} className="space-y-4">
           <Input label="Nom complet" value={editName} onChange={e => setEditName(e.target.value)} required />
@@ -220,7 +220,7 @@ export function ClientDetailsView({
           <button onClick={() => { setShowAddOrder(false); setEditingOrder(null); setNewOrder({ type: "", price: "", advance: "", deliveryDate: "", note: "" }); }} className="p-2 bg-white shadow-sm border border-slate-100 rounded-full active:scale-95 text-slate-600">
             <ChevronLeft size={24} />
           </button>
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">{editingOrder ? "Modifier Commande" : "Nouvelle Commande"}</h2>
+          <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{editingOrder ? "Modifier Commande" : "Nouvelle Commande"}</h2>
         </div>
         <form onSubmit={handleAddOrder} className="space-y-4">
           <Input label="Type de vêtement (ex: Robe de soirée)" value={newOrder.type} onChange={e => setNewOrder({...newOrder, type: e.target.value})} required />
@@ -279,7 +279,7 @@ export function ClientDetailsView({
             <ChevronLeft size={24} />
           </button>
           <div className="flex-1 overflow-hidden">
-            <h2 className="text-2xl font-black text-slate-900 truncate tracking-tight">{client.name}</h2>
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white truncate tracking-tight">{client.name}</h2>
             <p className="text-sm font-semibold text-slate-500">{client.phone}</p>
           </div>
         </div>
@@ -315,7 +315,7 @@ export function ClientDetailsView({
       {activeTab === "measurements" && (
         <div className="space-y-4">
           <div className="flex justify-between items-center px-1">
-            <h3 className="font-black text-lg text-slate-900 tracking-tight">Valeurs (cm)</h3>
+            <h3 className="font-black text-lg text-slate-900 dark:text-white tracking-tight">Valeurs (cm)</h3>
             {!isEditing ? (
               <button onClick={() => setIsEditing(true)} className="flex items-center gap-1.5 text-blue-600 font-bold text-sm bg-blue-50 px-3 py-1.5 rounded-lg active:bg-blue-100 transition-colors">
                 <Edit2 size={14} /> Modifier
@@ -348,7 +348,7 @@ export function ClientDetailsView({
                       className="w-16 bg-slate-50 border border-slate-200 rounded-xl text-center py-2 font-black outline-none focus:border-blue-500 text-slate-900"
                     />
                   ) : (
-                    <p className="text-xl font-black text-slate-900">{measurements[code] || "--"}</p>
+                    <p className="text-xl font-black text-slate-900 dark:text-white">{measurements[code] || "--"}</p>
                   )}
                 </div>
               ))}
@@ -368,7 +368,7 @@ export function ClientDetailsView({
               <Card key={order.id} className="space-y-3">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-black text-lg text-slate-900">{order.type}</p>
+                    <p className="font-black text-lg text-slate-900 dark:text-white">{order.type}</p>
                     <p className="text-sm font-semibold text-slate-500">Prévu pour : {new Date(order.deliveryDate).toLocaleDateString('fr-FR')}</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -389,7 +389,7 @@ export function ClientDetailsView({
                 
                 <div className="flex justify-between items-end border-t border-slate-100 pt-3 mt-3">
                   <div>
-                    <p className="font-bold text-slate-900">{order.price} FCFA</p>
+                    <p className="font-bold text-slate-900 dark:text-white">{order.price} FCFA</p>
                     {(order.price - order.advance) > 0 ? (
                       <p className="text-xs font-bold text-red-500">Reste : {order.price - order.advance} FCFA</p>
                     ) : (
