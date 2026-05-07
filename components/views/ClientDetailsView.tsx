@@ -14,7 +14,8 @@ export function ClientDetailsView({
   onAddOrder,
   onUpdateOrderStatus,
   onUpdateClient,
-  onDeleteClient
+  onDeleteClient,
+  onUpdateOrder
 }: {
   client: Client;
   orders: Order[];
