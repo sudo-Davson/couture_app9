@@ -23,7 +23,13 @@ export function Button({ children, variant = 'primary', className = '', ...props
   );
 }
 
-export function Input({ label, error, multiline, className = '', ...props }: any) {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: string;
+  multiline?: boolean;
+}
+
+export function Input({ label, error, multiline, className = '', ...props }: InputProps) {
   const inputClass = "w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-4 py-3.5 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-900 dark:text-white font-medium placeholder:text-slate-400";
   
   return (
