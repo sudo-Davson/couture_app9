@@ -23,10 +23,18 @@ export function Button({ children, variant = 'primary', className = '', ...props
   );
 }
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface InputProps {
   label?: string;
   error?: string;
   multiline?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  value?: string | number;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  className?: string;
+  [key: string]: any; // Permet de passer d'autres props sans erreur
 }
 
 export function Input({ label, error, multiline, className = '', ...props }: InputProps) {
